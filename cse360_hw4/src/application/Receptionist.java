@@ -3,15 +3,13 @@ package application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
+import javafx.scene.Scene; 
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -57,9 +55,7 @@ public class Receptionist {
         
         //save button
         Button saveButton = new Button("Save");
-        GridPane.setHalignment(saveButton, HPos.RIGHT);
-        form.add(saveButton, 1, 6);
-        
+       
         //button styles
         String buttonStyle = "-fx-background-color: rgb(90, 97, 203); "
         		+ "-fx-text-fill: black;"
@@ -90,6 +86,8 @@ public class Receptionist {
         form.add(hhistField, 1, 4);
         form.add(iidText, 0, 5);
         form.add(iidField, 1, 5);
+        GridPane.setHalignment(saveButton, HPos.RIGHT);
+        form.add(saveButton, 1, 6);
 
         // form alignments
         double fieldWidth = 200; 

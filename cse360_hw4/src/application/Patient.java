@@ -4,12 +4,12 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
-public class Patient { // Replace ViewName with PatientView, NurseView, TechnicianView
+public class Patient { 
     private Scene scene;
 
     public Patient() {
         BorderPane root = new BorderPane();
-        Text viewName = new Text("Patient View"); // Replace "View Name" with "Patient View", etc.
+        Text viewName = new Text("Patient View"); 
         root.setCenter(viewName);
         scene = new Scene(root, 400, 400);
     }

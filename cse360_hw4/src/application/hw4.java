@@ -40,7 +40,10 @@ public class hw4 extends Application {
             root.setCenter(vbox);
             
             //button styles
-            String buttonStyle = "-fx-background-color: rgb(90, 97, 203); -fx-text-fill: black; -fx-pref-width: 150px; -fx-pref-height: 40px";
+            String buttonStyle = "-fx-background-color: rgb(90, 97, 203);"
+            		+ "-fx-text-fill: black;"
+            		+ "-fx-pref-width: 150px;"
+            		+ "-fx-pref-height: 40px;";
             patientViewButton.setStyle(buttonStyle);
             receptionistViewButton.setStyle(buttonStyle);
             technicianViewButton.setStyle(buttonStyle);
