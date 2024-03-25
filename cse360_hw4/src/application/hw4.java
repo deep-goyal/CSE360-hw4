@@ -19,7 +19,6 @@ public class hw4 extends Application {
         	//root init
             BorderPane root = new BorderPane();
             
-            
             //welcome text
             Text welcome = new Text("Welcome to Heart Health Imaging and Recording System");
             
@@ -57,7 +56,6 @@ public class hw4 extends Application {
             root.setPadding(new Insets(40));
             BorderPane.setAlignment(vbox, Pos.CENTER);
             BorderPane.setAlignment(welcome, Pos.CENTER);
-            
             
             //set scene
             Scene scene = new Scene(root,500,320);
