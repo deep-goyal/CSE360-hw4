@@ -15,11 +15,14 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
 
 public class Receptionist { 
     private Scene scene;
 
-    public Receptionist() {
+    public Scene ReceptionistView(Stage stage, Scene mainScene) {
         BorderPane root = new BorderPane();
         
         //title
@@ -88,12 +91,17 @@ public class Receptionist {
 				String HHIST = hhistField.getText().trim();
 				String IID = iidField.getText().trim();
 				
-				String SEPARATOR = "\\\\\\";
+				String SEPARATOR = "\\";
 				
 				String dataOnFile = FNAME + SEPARATOR + LNAME + SEPARATOR + EMAIL + SEPARATOR + PNUM + SEPARATOR + HHIST + SEPARATOR + IID;
 				
 				try {
 					Utility.writePatientInfoToFile(id, dataOnFile);
+					// Delay for a few seconds before switching scenes
+			        PauseTransition delay = new PauseTransition(Duration.millis(3000));
+			        delay.setOnFinished(event -> stage.setScene(mainScene));
+			        delay.play();
+					
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
@@ -155,9 +163,8 @@ public class Receptionist {
         
         //add root to a scene
         scene = new Scene(root, 500, 350);
-    }
-
-    public Scene getScene() {
         return scene;
     }
+
+  
 }

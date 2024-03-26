@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 
+import javafx.animation.PauseTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,11 +14,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Technician {
     private Scene scene;
 
-    public Technician() {
+    public Scene TechnicianView(Stage stage, Scene mainScene) {
         BorderPane root = new BorderPane();
         GridPane form = new GridPane();
 
@@ -121,19 +124,24 @@ public class Technician {
 	        			String RCA = rcaField.getText().trim();
 	        			String PDA = pdaField.getText().trim();
 	        			
-	        			String SEPARATOR = "\\\\\\";
+	        			String SEPARATOR = "\\";
 	        			
 	        			String reportData = totalAgatston + SEPARATOR + LM + SEPARATOR + LAD + SEPARATOR + LCX + SEPARATOR + RCA + SEPARATOR + PDA;
 	        			
 						Utility.writePatientReportToFile(PATIENTID, reportData);
 						bufferSpace.setText("Patient Report Written");
+						
+						// Delay for a few seconds before switching scenes
+				        PauseTransition delay = new PauseTransition(Duration.millis(3000));
+				        delay.setOnFinished(event -> stage.setScene(mainScene));
+				        delay.play();
+				        
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
 	        	} else {
 	        		bufferSpace.setText("Patient File Missing!");
 	        	}
-	        	
         	}
         });
         
@@ -157,9 +165,7 @@ public class Technician {
 
         // Set the scene
         scene = new Scene(root, 500, 410);
-    }
-
-    public Scene getScene() {
         return scene;
     }
+
 }

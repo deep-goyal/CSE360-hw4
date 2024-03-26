@@ -28,11 +28,6 @@ public class hw4 extends Application {
             Button receptionistViewButton = new Button("Patient Intake");
             Button technicianViewButton = new Button("CT Scan Tech View");
             
-            //button event handlers
-            patientViewButton.setOnAction(e -> primaryStage.setScene(new Patient().getScene()));
-            receptionistViewButton.setOnAction(e -> primaryStage.setScene(new Receptionist().getScene()));
-            technicianViewButton.setOnAction(e -> primaryStage.setScene(new Technician().getScene()));
-            
             vbox.getChildren().addAll(receptionistViewButton, technicianViewButton, patientViewButton);
             
             //add elements to the borderpane
@@ -64,6 +59,12 @@ public class hw4 extends Application {
             Scene scene = new Scene(root,500,320);
             primaryStage.setScene(scene);
             primaryStage.show();
+            
+            //button event handlers
+            patientViewButton.setOnAction(e -> primaryStage.setScene(new Patient().PatientView(primaryStage)));
+            receptionistViewButton.setOnAction(e -> primaryStage.setScene(new Receptionist().ReceptionistView(primaryStage, scene)));
+            technicianViewButton.setOnAction(e -> primaryStage.setScene(new Technician().TechnicianView(primaryStage, scene)));
+            
         } catch(Exception e) {
             e.printStackTrace();
         }

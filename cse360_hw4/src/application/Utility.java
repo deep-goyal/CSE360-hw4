@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Random;
-import java.util.stream.Stream;
 
 public class Utility {
 
@@ -56,6 +55,22 @@ public class Utility {
     public static boolean checkPatientInfoExists(String patientID) {
         String filePath = DIRECTORY + File.separator + patientID + "_PatientInfo.txt";
         return new File(filePath).exists();
+    }
+    
+    public static boolean checkPatientReportExists(String patientID) {
+    	String reportPath = REPORTDIRECTORY + File.separator + patientID + "CTResults.txt";
+    	return new File(reportPath).exists();    
+    }
+    
+    public static String[] getPatientReportData(String patientID) throws IOException {
+        String reportPath = REPORTDIRECTORY + File.separator + patientID + "CTResults.txt";
+        if (!checkPatientReportExists(patientID)) {
+            throw new IOException("Report file for patient ID " + patientID + " does not exist.");
+        }
+
+        String reportData = new String(Files.readAllBytes(Paths.get(reportPath)));
+        // Split the string by a sequence of three backslashes
+        return reportData.split("\\\\");
     }
 }
 
