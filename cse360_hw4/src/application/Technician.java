@@ -1,5 +1,7 @@
 package application;
 
+import java.io.IOException;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -78,11 +80,64 @@ public class Technician {
         miniform.add(pdaField, 1, 4);
         
         form.add(miniform, 0,4);
+        
+        //buffer space for messages
+        Text bufferSpace = new Text("");
+        
+        form.add(bufferSpace, 0, 5);
 
         // Save Button
         Button saveButton = new Button("Save");
         saveButton.setFont(Font.font("Helvetica", FontWeight.BOLD, 12));
         
+        //save button event handler
+        saveButton.setOnAction(e -> {
+        	//check for empty fields
+        	if (totalAgatstonField.getText().trim().isEmpty()) {
+        		bufferSpace.setText("Total Agatston Field empty!");
+        	} else if (lmField.getText().trim().isEmpty()) {
+        		bufferSpace.setText("LM field empty!");
+        	} else if (ladField.getText().trim().isEmpty()) {
+        		bufferSpace.setText("LAD field empty!");
+        	} else if (lcxField.getText().trim().isEmpty()) {
+        		bufferSpace.setText("LCX field empty!");
+        	} else if (rcaField.getText().trim().isEmpty()) {
+        		bufferSpace.setText("RCA field empty!");
+        	} else if (pdaField.getText().trim().isEmpty()) {
+        		bufferSpace.setText("PDA field empty!");
+        	} else if (patientIdField.getText().trim().isEmpty()) {
+        		bufferSpace.setText("Patient ID field empty!");
+        	} else {
+        		String PATIENTID = patientIdField.getText();
+     
+	        	//check if patient file exists
+	        	if (Utility.checkPatientInfoExists(PATIENTID)) {
+	        		try {
+	        			//write to file
+	        			String totalAgatston = totalAgatstonField.getText().trim();
+	        			String LM = lmField.getText().trim();
+	        			String LAD = ladField.getText().trim();
+	        			String LCX = ladField.getText().trim();
+	        			String RCA = rcaField.getText().trim();
+	        			String PDA = pdaField.getText().trim();
+	        			
+	        			String SEPARATOR = "\\\\\\";
+	        			
+	        			String reportData = totalAgatston + SEPARATOR + LM + SEPARATOR + LAD + SEPARATOR + LCX + SEPARATOR + RCA + SEPARATOR + PDA;
+	        			
+						Utility.writePatientReportToFile(PATIENTID, reportData);
+						bufferSpace.setText("Patient Report Written");
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+	        	} else {
+	        		bufferSpace.setText("Patient File Missing!");
+	        	}
+	        	
+        	}
+        });
+        
+        //save button styles
         String buttonStyle = "-fx-background-color: rgb(90, 97, 203); "
         		+ "-fx-text-fill: black;"
         		+ "-fx-pref-width: 60px;"
@@ -101,7 +156,7 @@ public class Technician {
         root.setBottom(buttonBox);
 
         // Set the scene
-        scene = new Scene(root, 500, 380);
+        scene = new Scene(root, 500, 410);
     }
 
     public Scene getScene() {

@@ -11,12 +11,14 @@ import java.util.stream.Stream;
 
 public class Utility {
 
-	private static final String DIRECTORY = System.getProperty("user.dir") + File.separator + "patientdir";
+	private static final String DIRECTORY = System.getProperty("user.dir") + File.separator + "PatientInfo";
+	private static final String REPORTDIRECTORY = System.getProperty("user.dir") + File.separator + "PatientReports";
     private static final Random random = new Random();
 
     public static String createUniquePatientID() {
         // Create a directory if it does not exist
         new File(DIRECTORY).mkdir();
+        new File(REPORTDIRECTORY).mkdir();
 
         String id;
         do {
@@ -42,8 +44,18 @@ public class Utility {
     }
     
     public static void writePatientReportToFile(String patientID, String report) throws IOException {
-    	String filename = DIRECTORY + File.separator + patientID + "CTResults.txt";
-    	
+    	String filename = REPORTDIRECTORY + File.separator + patientID + "CTResults.txt";
+    	try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+            writer.write(report);
+            writer.close();
+        } catch(Exception e) {
+        	e.printStackTrace();
+        }
+    }
+    
+    public static boolean checkPatientInfoExists(String patientID) {
+        String filePath = DIRECTORY + File.separator + patientID + "_PatientInfo.txt";
+        return new File(filePath).exists();
     }
 }
 

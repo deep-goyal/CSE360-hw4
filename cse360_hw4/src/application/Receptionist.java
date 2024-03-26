@@ -61,7 +61,7 @@ public class Receptionist {
         //error space
         Text bufSpace = new Text("");
         
-        //save button functionality
+        //save button event handler
 		saveButton.setOnAction(e -> {
 			//check for empty fields
 			if (fnameField.getText().trim().isEmpty()) {
