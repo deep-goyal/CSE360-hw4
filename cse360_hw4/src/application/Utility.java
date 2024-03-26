@@ -42,6 +42,17 @@ public class Utility {
     }
     
     public static void writePatientReportToFile(String patientID, String report) throws IOException {
+    	String filename = DIRECTORY + File.separator + patientID + "CTResults.txt";
     	
     }
 }
+
+
+
+
+
+
+
+
+
+
