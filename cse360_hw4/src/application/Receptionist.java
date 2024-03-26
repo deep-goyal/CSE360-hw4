@@ -1,5 +1,7 @@
 package application;
 
+import java.io.IOException;
+
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -55,6 +57,48 @@ public class Receptionist {
         
         //save button
         Button saveButton = new Button("Save");
+        
+        //error space
+        Text bufSpace = new Text("");
+        
+        //save button functionality
+		saveButton.setOnAction(e -> {
+			//check for empty fields
+			if (fnameField.getText().trim().isEmpty()) {
+				bufSpace.setText("First Name Field is Empty");
+			} else if (lnameField.getText().trim().isEmpty()) {
+				bufSpace.setText("Last Name Field is Empty");
+			} else if (emailField.getText().trim().isEmpty()) {
+				bufSpace.setText("Email Field is Empty");
+			} else if (pnumField.getText().trim().isEmpty()) {
+				bufSpace.setText("Phone Number is Missing");
+			} else if (hhistField.getText().trim().isEmpty()) {
+				bufSpace.setText("Health history field empty. If the patient does not have a history, enter NONE");
+			} else if (iidField.getText().trim().isEmpty()) {
+				bufSpace.setText("Insurance ID missing");
+			} else {
+				String id = Utility.createUniquePatientID();
+				bufSpace.setText("Successful! Patient ID: " + id);
+				
+				//capture all data
+				String FNAME = fnameField.getText().trim();
+				String LNAME = lnameField.getText().trim();
+				String EMAIL = emailField.getText().trim();
+				String PNUM = pnumField.getText().trim();
+				String HHIST = hhistField.getText().trim();
+				String IID = iidField.getText().trim();
+				
+				String SEPARATOR = "\\\\\\";
+				
+				String dataOnFile = FNAME + SEPARATOR + LNAME + SEPARATOR + EMAIL + SEPARATOR + PNUM + SEPARATOR + HHIST + SEPARATOR + IID;
+				
+				try {
+					Utility.writePatientInfoToFile(id, dataOnFile);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+        });
        
         //button styles
         String buttonStyle = "-fx-background-color: rgb(90, 97, 203); "
@@ -70,8 +114,8 @@ public class Receptionist {
         // Constraints to align right
         ColumnConstraints column1 = new ColumnConstraints();
         ColumnConstraints column2 = new ColumnConstraints();
-        column2.setHgrow(Priority.ALWAYS); // Allow text fields to grow
-        form.getColumnConstraints().addAll(column1, column2); // Apply constraints to GridPane
+        column2.setHgrow(Priority.ALWAYS); 
+        form.getColumnConstraints().addAll(column1, column2); 
 
         // Adding the labels and text fields to the grid
         form.add(fnameText, 0, 0);
@@ -88,6 +132,7 @@ public class Receptionist {
         form.add(iidField, 1, 5);
         GridPane.setHalignment(saveButton, HPos.RIGHT);
         form.add(saveButton, 1, 6);
+        form.add(bufSpace, 0, 7);
 
         // form alignments
         double fieldWidth = 200; 
