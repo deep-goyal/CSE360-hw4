@@ -1,3 +1,13 @@
+/**
+ *	Technician class contains all implementation for report generation and 
+ *	UI components for technician interface
+ *	
+ *	@author Deep Goyal
+ *	@ref Prof. Lynn Robert Carter
+ *	@version 1.0
+ *	@since 03-26-2024
+ */
+
 package application;
 
 import java.io.IOException;
@@ -19,7 +29,16 @@ import javafx.util.Duration;
 
 public class Technician {
     private Scene scene;
-
+    
+    /**
+     * Render technician UI components and event handlers for buttons
+     * 
+     * @param stage Stage for scene updates
+     * @param mainScene Main UI scene for backtrack
+     * @throws IOException if file writing features encounter issues
+     * @return scene with a borderpane containing all UI components
+     * 
+     */
     public Scene TechnicianView(Stage stage, Scene mainScene) {
         BorderPane root = new BorderPane();
         GridPane form = new GridPane();
@@ -86,11 +105,7 @@ public class Technician {
         
         //buffer space for messages
         Text bufferSpace = new Text("");
-        
         form.add(bufferSpace, 0, 5);
-
-     
-        
         
         // Save Button
         Button saveButton = new Button("Save");
@@ -161,7 +176,6 @@ public class Technician {
         		+ "-fx-pref-height: 30px;";
         saveButton.setStyle(buttonStyle);
         backButton.setStyle(buttonStyle);
-        
         
         HBox buttonBox = new HBox(10, backButton, saveButton); // Added 10 as spacing between buttons
         buttonBox.setAlignment(Pos.CENTER_RIGHT);

@@ -1,3 +1,12 @@
+/**
+ *	Main interface for all users.
+ * 
+ *	@author Deep Goyal
+ *	@ref Prof. Lynn Robert Carter
+ *	@version 1.0
+ *	@since 03-26-2024
+ */
+
 package application;
 
 import javafx.application.Application;
@@ -13,6 +22,13 @@ import javafx.scene.text.Text;
 import javafx.scene.control.Button;
 
 public class hw4 extends Application {
+	/**
+	 * Generates the three buttons and connects them to the cooresponding views
+	 * 
+	 * @catch Exception- failure to render UI elements and/or File IO Exceptions
+	 * @param primaryStage app's stage to view content
+	 * 
+	 */
     @Override
     public void start(Stage primaryStage) {
         try {
@@ -28,10 +44,12 @@ public class hw4 extends Application {
             Button receptionistViewButton = new Button("Patient Intake");
             Button technicianViewButton = new Button("CT Scan Tech View");
             
+            //button font styles
             patientViewButton.setFont(Font.font("Helvetica", FontWeight.BOLD, 12));
             receptionistViewButton.setFont(Font.font("Helvetica", FontWeight.BOLD, 12));
             technicianViewButton.setFont(Font.font("Helvetica", FontWeight.BOLD, 12));
             
+            //add buttons to vbox
             vbox.getChildren().addAll(receptionistViewButton, technicianViewButton, patientViewButton);
             
             //add elements to the borderpane
@@ -60,7 +78,7 @@ public class hw4 extends Application {
             BorderPane.setAlignment(vbox, Pos.CENTER);
             BorderPane.setAlignment(welcome, Pos.CENTER);
             
-            //set scene
+            //set scene to the stage
             Scene scene = new Scene(root,500,320);
             primaryStage.setScene(scene);
             primaryStage.show();

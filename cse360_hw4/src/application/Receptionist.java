@@ -1,3 +1,13 @@
+/**
+ *	Receptionist class for all features catered for lab reception
+ *
+ *	@author Deep Goyal
+ *	@ref Prof. Lynn Robert Carter
+ *	@version 1.0
+ *	@since 03-26-2024
+ *
+ */
+
 package application;
 
 import java.io.IOException;
@@ -22,7 +32,15 @@ import javafx.util.Duration;
 
 public class Receptionist { 
     private Scene scene;
-
+    
+    /**
+     * Renders all receptionist view components and event handlers
+     * 
+     * @param stage app stage for scene updates
+     * @param mainScene to backtrack to the main UI
+     * @throws IOException if file writing was unsuccessful
+     * @return scene containing borderpane with all functional UI elements
+     */
     public Scene ReceptionistView(Stage stage, Scene mainScene) {
         BorderPane root = new BorderPane();
         
@@ -128,10 +146,10 @@ public class Receptionist {
 
         // HBox for holding both buttons
         HBox buttonBox = new HBox(10, backButton, saveButton);
-        buttonBox.setAlignment(Pos.CENTER_RIGHT); // Align to the right
-        GridPane.setHalignment(buttonBox, HPos.RIGHT); // Align to the right within the grid cell
+        buttonBox.setAlignment(Pos.CENTER_RIGHT);
+        GridPane.setHalignment(buttonBox, HPos.RIGHT); 
         
-        
+        //grid gaps
         form.setHgap(10); // Horizontal gap between columns
         form.setVgap(10); // Vertical gap between rows
         form.setAlignment(Pos.CENTER);

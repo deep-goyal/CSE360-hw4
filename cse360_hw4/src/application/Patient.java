@@ -1,3 +1,12 @@
+/**
+ *	Patient object with all UI components and event handlers for patient report rendering
+ *	
+ *	@author Deep Goyal
+ *	@ref Prof. Lynn Robert Carter
+ *	@version 1.0
+ *	@since 03-26-2024
+ */
+
 package application;
 
 import javafx.geometry.Insets;
@@ -11,9 +20,18 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Patient { 
+public class Patient {
+	//private scene instance
     private Scene scene;
-
+    
+    /**
+     * Prompt user for patientID and retrieve their reports for rendering, 
+     * while handling all potential errors
+     * 
+     * @param stage app's stage
+     * @throws IOException if patient files are not found
+     * @return PatientView with all functional UI components
+     */
     public Scene PatientView(Stage stage) {
     	BorderPane root = new BorderPane();
     	
@@ -31,28 +49,33 @@ public class Patient {
     	//buffer text for errors or other messages
     	Text bufSpace = new Text("");
     	
+    	//node alignment
     	BorderPane.setAlignment(vbox, Pos.CENTER);
     	vbox.setAlignment(Pos.CENTER);
-    	
-    	vbox.getChildren().addAll(greet,pid,bufSpace, submitbtn);
-    	
-    	root.setCenter(vbox);
-    	
     	root.setPadding(new Insets(30));
     	vbox.setSpacing(10);
     	pid.setMaxWidth(200);
     	
-        // Set the scene
+    	//populate node combiners
+    	vbox.getChildren().addAll(greet,pid,bufSpace, submitbtn);
+    	root.setCenter(vbox);
+    	
+        //define a scene with the nodes
         scene = new Scene(root, 400, 300);
         
+        //submit button handler
         submitbtn.setOnAction(e -> {
+        	//check for missing input
     		if (pid.getText().trim().isEmpty()) {
     			bufSpace.setText("Enter a patient id!");
     		} else {
+    			//check if patient file exists
     			if (Utility.checkPatientInfoExists(pid.getText())) {
+    				//check if report exists
     				if (Utility.checkPatientReportExists(pid.getText())) {
-    				scene = new Scene(getPatientReport(pid.getText().trim()), 400,300);
-    				stage.setScene(scene);
+    					//find the report and set it to the scene
+	    				scene = new Scene(getPatientReport(pid.getText().trim()), 400,300);
+	    				stage.setScene(scene);
     				} else {
     					bufSpace.setText("Patient report does not exist!");
     				}
@@ -61,17 +84,20 @@ public class Patient {
     			}
     		}
     	});
+        
         return scene;
     }
     
+    /**
+     * construct a borderpane with all patient report data
+     * 
+     * @param patientID
+     * @throws IOException for file io issues
+     * @return borderpane with reports
+     */
     public BorderPane getPatientReport (String patientID) {
     	BorderPane root = new BorderPane();
         GridPane form = new GridPane();
-
-        form.setAlignment(Pos.CENTER);
-        form.setHgap(10);
-        form.setVgap(10);
-        form.setPadding(new Insets(20));
 
         // Patient ID
         Text patientGreet = new Text("Hello patient");  
@@ -83,18 +109,15 @@ public class Patient {
         } catch (Exception e) {
         	e.printStackTrace();
         }
+        
         // The total Agatston CAC score
         Text totalAgatstonText = new Text("The total Agatston CAC score: ");
         Text totalAgatstonField = new Text(reportData[0]);
         form.add(totalAgatstonText, 0, 0);
         form.add(totalAgatstonField, 1, 0);
         
+        //miniform grid for vessel cac scores
         GridPane miniform = new GridPane();
-        
-        miniform.setHgap(10);
-        miniform.setVgap(10);
-        
-       
         
         //miniform elements
         //lm
@@ -128,8 +151,15 @@ public class Patient {
         miniform.add(rcaField, 1, 3);
         miniform.add(pdaLabel, 0, 4);
         miniform.add(pdaField, 1, 4);
-        
         form.add(miniform, 0,2);
+        
+        //node alignments
+        form.setAlignment(Pos.CENTER);
+        form.setHgap(10);
+        form.setVgap(10);
+        form.setPadding(new Insets(20));
+        miniform.setHgap(10);
+        miniform.setVgap(10);
         
         //root alignment
         BorderPane.setAlignment(patientGreet, Pos.CENTER);
@@ -140,6 +170,5 @@ public class Patient {
         root.setCenter(form);
         
         return root;
-    	
     }
 }
