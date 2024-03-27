@@ -99,8 +99,15 @@ public class Patient {
     	BorderPane root = new BorderPane();
         GridPane form = new GridPane();
 
-        // Patient ID
-        Text patientGreet = new Text("Hello patient");  
+        String fullName = "";
+        try {
+        	fullName = Utility.getPatientName(patientID);
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+        
+        String greeting = "Hello" + fullName;
+        Text patientGreet = new Text(greeting);  
         
         String[] reportData = new String[6];
         

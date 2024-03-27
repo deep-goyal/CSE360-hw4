@@ -131,6 +131,26 @@ public class Utility {
         // Split the string by a sequence of three backslashes
         return reportData.split("\\\\");
     }
+    
+    /**
+     * retrieves the patient's full name from the patient information file
+     *
+     * @param patientID 
+     * @return The full name of the patient.
+     * @throws IOException If an error occurs while reading the file.
+     */
+    public static String getPatientName(String patientID) throws IOException {
+        String filePath = DIRECTORY + File.separator + patientID + "_PatientInfo.txt";
+        if (!checkPatientInfoExists(patientID)) {
+            throw new IOException("Patient info file for patient ID " + patientID + " does not exist.");
+        }
+
+        String patientData = new String(Files.readAllBytes(Paths.get(filePath)));
+        String[] pinfo = patientData.split("\\\\"); // Assumes the SEPARATOR is a single backslash.
+        
+        // Assuming the first two parts are the first name and last name
+        return pinfo[0] + " " + pinfo[1];
+    }
 }
 
 
