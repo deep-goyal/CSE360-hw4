@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -115,6 +116,22 @@ public class Receptionist {
         		+ "-fx-pref-height: 30px;";
         saveButton.setStyle(buttonStyle);
         
+        // Back button
+        Button backButton = new Button("Back");
+        backButton.setStyle(buttonStyle);
+        backButton.setOnAction(e -> {
+            // Switch back to the mainScene when the back button is clicked
+            stage.setScene(mainScene);
+        });
+        saveButton.setFont(Font.font("Helvetica", FontWeight.BOLD, 12));
+        backButton.setFont(Font.font("Helvetica", FontWeight.BOLD, 12));
+
+        // HBox for holding both buttons
+        HBox buttonBox = new HBox(10, backButton, saveButton);
+        buttonBox.setAlignment(Pos.CENTER_RIGHT); // Align to the right
+        GridPane.setHalignment(buttonBox, HPos.RIGHT); // Align to the right within the grid cell
+        
+        
         form.setHgap(10); // Horizontal gap between columns
         form.setVgap(10); // Vertical gap between rows
         form.setAlignment(Pos.CENTER);
@@ -139,7 +156,7 @@ public class Receptionist {
         form.add(iidText, 0, 5);
         form.add(iidField, 1, 5);
         GridPane.setHalignment(saveButton, HPos.RIGHT);
-        form.add(saveButton, 1, 6);
+        form.add(buttonBox, 1, 6);
         form.add(bufSpace, 0, 7);
 
         // form alignments

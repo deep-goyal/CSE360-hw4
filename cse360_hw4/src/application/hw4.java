@@ -28,6 +28,10 @@ public class hw4 extends Application {
             Button receptionistViewButton = new Button("Patient Intake");
             Button technicianViewButton = new Button("CT Scan Tech View");
             
+            patientViewButton.setFont(Font.font("Helvetica", FontWeight.BOLD, 12));
+            receptionistViewButton.setFont(Font.font("Helvetica", FontWeight.BOLD, 12));
+            technicianViewButton.setFont(Font.font("Helvetica", FontWeight.BOLD, 12));
+            
             vbox.getChildren().addAll(receptionistViewButton, technicianViewButton, patientViewButton);
             
             //add elements to the borderpane
@@ -46,6 +50,7 @@ public class hw4 extends Application {
             //vbox alignments
             vbox.setSpacing(20);
             vbox.setAlignment(Pos.CENTER);
+            vbox.setPadding(new Insets(30,0,0,0));
             
             //welcome styles
             welcome.setFont(Font.font("Helvetica", FontWeight.BOLD, 15));

@@ -89,9 +89,18 @@ public class Technician {
         
         form.add(bufferSpace, 0, 5);
 
+     
+        
+        
         // Save Button
         Button saveButton = new Button("Save");
         saveButton.setFont(Font.font("Helvetica", FontWeight.BOLD, 12));
+        // Back Button
+        Button backButton = new Button("Back");
+        backButton.setOnAction(e -> {
+            stage.setScene(mainScene);
+        });
+        backButton.setFont(Font.font("Helvetica", FontWeight.BOLD, 12));
         
         //save button event handler
         saveButton.setOnAction(e -> {
@@ -151,10 +160,11 @@ public class Technician {
         		+ "-fx-pref-width: 60px;"
         		+ "-fx-pref-height: 30px;";
         saveButton.setStyle(buttonStyle);
+        backButton.setStyle(buttonStyle);
         
         
-        HBox buttonBox = new HBox(saveButton);
-        buttonBox.setAlignment(Pos.BOTTOM_RIGHT);
+        HBox buttonBox = new HBox(10, backButton, saveButton); // Added 10 as spacing between buttons
+        buttonBox.setAlignment(Pos.CENTER_RIGHT);
         buttonBox.setPadding(new Insets(10, 0, 10, 0));
         
         root.setPadding(new Insets(10,30,80,30));
