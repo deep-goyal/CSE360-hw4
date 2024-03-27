@@ -49,6 +49,14 @@ public class Patient {
     	//buffer text for errors or other messages
     	Text bufSpace = new Text("");
     	
+    	//button styles
+        String buttonStyle = "-fx-background-color: rgb(90, 97, 203); "
+        		+ "-fx-text-fill: black;"
+        		+ "-fx-pref-width: 60px;"
+        		+ "-fx-pref-height: 30px;";
+        
+        submitbtn.setStyle(buttonStyle);
+    	
     	//node alignment
     	BorderPane.setAlignment(vbox, Pos.CENTER);
     	vbox.setAlignment(Pos.CENTER);
@@ -106,7 +114,7 @@ public class Patient {
         	e.printStackTrace();
         }
         
-        String greeting = "Hello" + fullName;
+        String greeting = "Hello " + fullName;
         Text patientGreet = new Text(greeting);  
         
         String[] reportData = new String[6];

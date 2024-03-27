@@ -11,7 +11,6 @@
 package application;
 
 import java.io.IOException;
-
 import javafx.animation.PauseTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
